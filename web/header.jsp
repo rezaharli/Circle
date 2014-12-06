@@ -23,17 +23,6 @@
         <link rel="stylesheet" href="css/templatemo_style.css">
 
         <script src="js/vendor/modernizr-2.6.2.min.js"></script>
-        <script>
-            function getRequestObject() {
-                if (window.XMLHttpRequest) {
-                    return(new XMLHttpRequest());
-                } else if (window.ActiveXObject) {
-                    return (new ActiveXObject("Microsoft.XMLHTTP"));
-                } else {
-                    return(null);
-                }
-            }
-        </script>
     <body>
 
         <div class="bg-overlay"></div>

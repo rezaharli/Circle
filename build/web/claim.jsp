@@ -16,18 +16,6 @@
     </li>
 </ul> <!-- /.tabs -->
 <div class="col-md-12 col-sm-12">
-    <script>
-        function hitung() {
-            var request = getRequestObject();
-            request.open("GET", "http://localhost:8080/Circle/showObat");
-            request.send(null);
-            request.onreadystatechange = function () {
-                if (request.readyState === 4 && request.status === 200) {
-                    document.getElementById("hasil").innerHTML = request.responseText;
-                }
-            };
-        }
-    </script>
     <div class="toggle-content text-center" id="tab4">
         <h3>Our Services</h3>
         <p></p>

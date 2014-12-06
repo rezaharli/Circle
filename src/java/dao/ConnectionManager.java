@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Reza Harli
- */
 public class ConnectionManager {
 
     static Connection connection;
@@ -16,10 +12,6 @@ public class ConnectionManager {
     static String password = "";
     static String className = "com.mysql.jdbc.Driver";
 
-    /**
-     *
-     * @return
-     */
     public static Connection getConnection() {
         try {
             Class.forName(className);

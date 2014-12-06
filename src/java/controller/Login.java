@@ -74,14 +74,19 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            User user = new User(request.getParameter("username"), request.getParameter("password"));
 
-            User loggedInUser = UserDAO.login(user);
-            if (loggedInUser != null) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("currentSessionUser", loggedInUser);
-            }
+        User user = new User(request.getParameter("username"), request.getParameter("password"));
+
+        User loggedInUser = UserDAO.login(user);
+
+        if (loggedInUser == null) {
+            response.sendError(987234692, "Password Salah");
+//            response.sendRedirect("LoginFailure.jsp");
+        } else {
+            HttpSession session = request.getSession(true);
+            session.setAttribute("currentSessionUser", loggedInUser);
             response.sendRedirect("index.jsp");
+        }
     }
 
     /**
