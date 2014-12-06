@@ -5,20 +5,23 @@
  */
 package controller;
 
+import dao.ObatDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Obat;
 
 /**
  *
  * @author Reza Harli
  */
-@WebServlet(name = "showObat", urlPatterns = {"/showObat"})
-public class showObat extends HttpServlet {
+@WebServlet(name = "ShowObat", urlPatterns = {"/ShowObat"})
+public class ShowObat extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +61,11 @@ public class showObat extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        PrintWriter out = response.getWriter();
+        LinkedList<Obat> obats = ObatDAO.selectAll();
+        for (Obat obat : obats) {
+            out.write(obat.getNama());
+        }
     }
 
     /**
