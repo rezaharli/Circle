@@ -6,7 +6,7 @@
 package model;
 
 /**
- *
+ * 
  * @author Reza Harli
  */
 public class User {

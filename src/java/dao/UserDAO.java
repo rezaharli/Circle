@@ -6,12 +6,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import model.User;
 
+/**
+ *
+ * @author Reza Harli
+ */
 public class UserDAO {
 
     static Connection connection = null;
     static ResultSet rs = null;
     static Statement statement = null;
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public static User login(User user) {
         String sql = "select * from user where username='" + user.getUsername() + "' AND password='" + user.getPassword() + "'";
         connection = ConnectionManager.getConnection();
@@ -32,6 +41,11 @@ public class UserDAO {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public static boolean register(User user) {
         String sql
                 = "INSERT INTO `user` "
