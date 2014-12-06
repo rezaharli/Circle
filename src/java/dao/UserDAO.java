@@ -1,20 +1,13 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import model.User;
 
 /**
  *
  * @author Reza Harli
  */
-public class UserDAO {
-
-    static Connection connection = null;
-    static ResultSet rs = null;
-    static Statement statement = null;
+public class UserDAO extends DAO{
 
     /**
      *
@@ -61,33 +54,6 @@ public class UserDAO {
             reset();
         }
         return true;
-    }
-
-    private static void reset() {
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (Exception e) {
-            }
-            rs = null;
-        }
-
-        if (statement != null) {
-            try {
-                statement.close();
-            } catch (Exception e) {
-            }
-            statement = null;
-        }
-
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (Exception e) {
-            }
-
-            connection = null;
-        }
     }
 
 }
