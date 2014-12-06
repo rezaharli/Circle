@@ -27,10 +27,33 @@
         </a> <!-- /.icon-item -->
     </li>
 </ul> <!-- /.tabs -->
-<div class="col-md-12 col-sm-12">
-    <div class="toggle-content text-center" id="tab4">
-        <h3>Obat</h3>
-        <p id="tab4p"></p>
+<div class="col-md-12">
+    <div class="col-md-12" id="tab4">
+        <div class="col-md-6">
+            <form action="InsertKlaim" method="post" style="margin-top: 30px;">
+                <fieldset>
+                    <input type="text" id="tanggal" name="tanggal" placeholder="Tanggal" />
+                </fieldset>
+                <fieldset style="width: 49%; float:left">
+                    <input type="text" id="namaDokter" name="namaDokter" placeholder="Dokter" />
+                </fieldset>
+                <fieldset style="width: 49%; float: right">
+                    <input type="text" id="hargaDokter" name="hargaDokter" placeholder="Harga Dokter" />
+                </fieldset>
+                <fieldset style="width: 49%; float:left">
+                    <input type="text" id="obat" name="obat" placeholder="Obat" class="col-md-6" />
+                </fieldset>
+                <fieldset style="width: 49%; float: right">
+                    <input type="text" id="hargaObat" name="hargaObat" placeholder="Harga Obat" />
+                </fieldset>
+                <fieldset style="width: 100%; float: left">
+                    <input type="submit" name="submit" value="Submit" id="submit" class="button">
+                </fieldset>
+            </form>
+        </div>
+        <div class="toggle-content text-center">
+
+        </div>
     </div>
 
     <div class="toggle-content text-center" id="tab5">

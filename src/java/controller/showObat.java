@@ -64,7 +64,7 @@ public class ShowObat extends HttpServlet {
         PrintWriter out = response.getWriter();
         LinkedList<Obat> obats = ObatDAO.selectAll();
         for (Obat obat : obats) {
-            out.write(obat.getNama());
+            out.write(obat.getNama() + " " + obat.getHarga());
         }
     }
 
