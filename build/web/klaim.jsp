@@ -12,7 +12,7 @@
 </script>
 <ul class="tabs">
     <li class="col-md-4 col-sm-4">
-        <a href="#tab4" class="icon-item" onclick="showObat()">
+        <a href="#tab4" class="icon-item">
             <i class="fa fa-cogs"></i>
         </a> <!-- /.icon-item -->
     </li>

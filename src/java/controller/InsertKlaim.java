@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import model.Dokter;
 import model.Klaim;
 import model.Obat;
+import model.Tanggal;
 import model.User;
 
 /**
@@ -87,26 +88,19 @@ public class InsertKlaim extends HttpServlet {
             String namaObat = request.getParameter("namaObat");
             String hargaObat = request.getParameter("hargaObat");
 
-            Calendar now = Calendar.getInstance();
-            int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
-            String dayOfMonthStr = dayOfMonth + "";
-            int month = now.get(Calendar.MONTH) + 1;
-            String monthStr = ((month < 10) ? "0" : "") + month;
-            String tanggal = now.get(Calendar.YEAR) + "-" + monthStr + "-" + dayOfMonthStr;
-
-            HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("currentSessionUser");
-
-            Klaim klaim = new Klaim(null, tanggal, user.getUsername());
-            klaim.setId(KlaimDAO.insert(klaim));
+//            HttpSession session = request.getSession(false);
+//            User user = (User) session.getAttribute("currentSessionUser");
+//
+//            Klaim klaim = new Klaim(null, Tanggal.getTanggalSekarang(), user.getUsername());
+//            klaim.setId(KlaimDAO.insert(klaim));
+//            
+//            Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
+//            ObatDAO.insert(obat);
+//            
+//            Dokter dokter = new Dokter(null, namaDokter, hargaDokter, klaim.getId());
+//            DokterDAO.insert(dokter);
             
-            Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
-            ObatDAO.insert(obat);
-            
-            Dokter dokter = new Dokter(null, namaDokter, hargaDokter, klaim.getId());
-            DokterDAO.insert(dokter);
-            
-            
+            response.sendRedirect("index.jsp");
         } catch (NullPointerException m) {
             m.printStackTrace(response.getWriter());
         }

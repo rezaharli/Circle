@@ -9,7 +9,6 @@
 
 <html class="no-js"> 
     <head>
-        <meta charset="utf-8">
         <title>Circle</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width" />
@@ -22,7 +21,8 @@
         <link rel="stylesheet" href="css/templatemo_misc.css">
         <link rel="stylesheet" href="css/templatemo_style.css">
 
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="js/jquery-1.11.1.min.js" ></script>
+        <script src="js/vendor/modernizr-2.6.2.min.js" ></script>
         <script>
             function getRequestObject() {
                 if (window.XMLHttpRequest) {
