@@ -2,34 +2,35 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.LinkedList;
-import model.Obat;
+import model.Dokter;
 
 /**
  *
  * @author Reza Harli
  */
-public class ObatDAO extends DAO {
+public class DokterDAO extends DAO {
 
     /**
      *
+     * @param idKlaim
      * @return
      */
-    public static LinkedList<Obat> selectAllByIdKlaim(String idKlaim) {
-        String sql = "select * from obat where id_klaim = " + idKlaim;
+    public static LinkedList<Dokter> selectAllByIdKlaim(String idKlaim) {
+        String sql = "select * from dokter where id_klaim = " + idKlaim;
         connection = ConnectionManager.getConnection();
-        LinkedList<Obat> obats = new LinkedList<>();
+        LinkedList<Dokter> dokters = new LinkedList<>();
         try {
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
             while (rs.next()) {
-                obats.add(new Obat(rs.getString("id"), rs.getString("nama"), rs.getString("harga")));
+                dokters.add(new Dokter(rs.getString("id"), rs.getString("nama"), rs.getString("harga")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
         } finally {
             reset();
         }
-        return obats;
+        return dokters;
     }
 
 }

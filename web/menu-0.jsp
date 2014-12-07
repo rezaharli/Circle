@@ -2,6 +2,6 @@
     <% if (session.getAttribute("currentSessionUser") == null) {%>
     <%@include file="formLoginRegister.jsp" %>
     <% } else { %>
-    <%@include file="claim.jsp" %>
+    <%@include file="klaim.jsp" %>
     <% }%>
 </div>
