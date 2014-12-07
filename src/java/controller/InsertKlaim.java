@@ -97,7 +97,7 @@ public class InsertKlaim extends HttpServlet {
             HttpSession session = request.getSession(false);
             User user = (User) session.getAttribute("currentSessionUser");
 
-            Klaim klaim = new Klaim("", tanggal, "admin");
+            Klaim klaim = new Klaim(null, tanggal, user.getUsername());
             klaim.setId(KlaimDAO.insert(klaim));
             
             Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
@@ -105,6 +105,8 @@ public class InsertKlaim extends HttpServlet {
             
             Dokter dokter = new Dokter(null, namaDokter, hargaDokter, klaim.getId());
             DokterDAO.insert(dokter);
+            
+            
         } catch (NullPointerException m) {
             m.printStackTrace(response.getWriter());
         }
