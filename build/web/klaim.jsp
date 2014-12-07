@@ -1,16 +1,16 @@
+<script>
+    function showObat() {
+        var request = getRequestObject();
+        request.open("GET", "http://localhost:8080/Circle/ShowObat");
+        request.send(null);
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                document.getElementById("tab4p").innerHTML = request.responseText;
+            }
+        };
+    }
+</script>
 <ul class="tabs">
-    <script>
-        function showObat() {
-            var request = getRequestObject();
-            request.open("GET", "http://localhost:8080/Circle/ShowObat");
-            request.send(null);
-            request.onreadystatechange = function () {
-                if (request.readyState === 4 && request.status === 200) {
-                    document.getElementById("tab4p").innerHTML = request.responseText;
-                }
-            };
-        }
-    </script>
     <li class="col-md-4 col-sm-4">
         <a href="#tab4" class="icon-item" onclick="showObat()">
             <i class="fa fa-cogs"></i>

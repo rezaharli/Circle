@@ -27,10 +27,9 @@
         </a> <!-- /.icon-item -->
     </li>
 </ul> <!-- /.tabs -->
-<div class="col-md-12 col-sm-12">
-    <div class="toggle-content text-center" id="tab4">
-        <h3>Obat</h3>
-        <p id="tab4p"></p>
+<div class="col-md-12">
+    <div class="col-md-12" id="tab4">
+        <%@include file="formInsertKlaim.jsp" %>
     </div>
 
     <div class="toggle-content text-center" id="tab5">

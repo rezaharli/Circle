@@ -22,7 +22,7 @@ public class ObatDAO extends DAO {
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
             while (rs.next()) {
-                obats.add(new Obat(rs.getString("id"), rs.getString("nama"), rs.getString("harga")));
+                obats.add(new Obat(rs.getString("id"), rs.getString("nama"), rs.getString("harga"), rs.getString("id_klaim")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -30,6 +30,23 @@ public class ObatDAO extends DAO {
             reset();
         }
         return obats;
+    }
+    
+    public static boolean insert(Obat obat) {
+        String sql
+                = "INSERT INTO `obat` "
+                + "(`nama`, `harga`, `id_klaim`) VALUES "
+                + "('" + obat.getNama()+ "', " + obat.getHarga()+ ", " + obat.getIdKlaim()+ ");";
+        connection = ConnectionManager.getConnection();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            return false;
+        } finally {
+            reset();
+        }
+        return true;
     }
 
 }

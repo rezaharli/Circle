@@ -7,29 +7,34 @@ package dao;
 
 import static dao.DAO.connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import model.Klaim;
 
 /**
  *
  * @author Reza Harli
  */
-public class KlaimDAO extends DAO{
-    
-    public static boolean insert(Klaim klaim) {
+public class KlaimDAO extends DAO {
+
+    public static String insert(Klaim klaim) {
         String sql
                 = "INSERT INTO `klaim` "
                 + "(`tanggal`, `username`) VALUES "
-                + "('" + klaim.getTanggal()+ "', '" + klaim.getUsername() + "');";
+                + "('" + klaim.getTanggal() + "', '" + klaim.getUsername() + "');";
         connection = ConnectionManager.getConnection();
+        String idKlaim = null;
         try {
             statement = connection.createStatement();
-            statement.executeUpdate(sql);
+            statement.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            rs = statement.getGeneratedKeys();
+            if (rs.next()) {
+               idKlaim = rs.getString(1);
+            }
         } catch (SQLException ex) {
-            return false;
         } finally {
             reset();
         }
-        return true;
+        return idKlaim;
     }
-    
+
 }

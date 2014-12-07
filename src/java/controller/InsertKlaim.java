@@ -6,6 +6,7 @@
 package controller;
 
 import dao.KlaimDAO;
+import dao.ObatDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Klaim;
+import model.Obat;
 import model.User;
 
 /**
@@ -77,26 +79,30 @@ public class InsertKlaim extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+            String namaDokter = request.getParameter("namaDokter");
+            String hargaDokter = request.getParameter("hargaDokter");
+            String namaObat = request.getParameter("namaObat");
+            String hargaObat = request.getParameter("hargaObat");
 
-        String namaDokter = request.getParameter("namaDokter");
-        String hargaDokter = request.getParameter("hargaDokter");
-        String namaObat = request.getParameter("namaObat");
-        String hargaObat = request.getParameter("hargaObat");
+            Calendar now = Calendar.getInstance();
+            int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
+            String dayOfMonthStr = dayOfMonth + "";
+            int month = now.get(Calendar.MONTH) + 1;
+            String monthStr = ((month < 10) ? "0" : "") + month;
+            String tanggal = now.get(Calendar.YEAR) + "-" + monthStr + "-" + dayOfMonthStr;
 
-        Calendar now = Calendar.getInstance();
-        int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
-        String dayOfMonthStr = dayOfMonth + "";
-        int month = now.get(Calendar.MONTH) + 1;
-        String monthStr = ((month < 10) ? "0" : "") + month;
-        String tanggal = now.get(Calendar.YEAR) + "-" + monthStr + "-" + dayOfMonthStr;
+            HttpSession session = request.getSession(false);
+            User user = (User) session.getAttribute("currentSessionUser");
 
-        HttpSession session = request.getSession(false);
-        User user = (User) session.getAttribute("currentSessionUser");
-
-        Klaim klaim = new Klaim(null, tanggal, user.getUsername());
-        KlaimDAO.insert(klaim);
-        
-        response.sendRedirect("index.jsp");
+            Klaim klaim = new Klaim("", tanggal, "admin");
+            klaim.setId(KlaimDAO.insert(klaim));
+            
+            Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
+            ObatDAO.insert(obat);
+        } catch (NullPointerException m) {
+            m.printStackTrace(response.getWriter());
+        }
     }
 
     /**
