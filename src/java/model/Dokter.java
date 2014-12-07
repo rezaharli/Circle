@@ -13,11 +13,13 @@ public class Dokter {
     private String id;
     private String nama;
     private String harga;
+    private String idKlaim;
 
-    public Dokter(String id, String nama, String harga) {
+    public Dokter(String id, String nama, String harga, String idKlaim) {
         this.id = id;
         this.nama = nama;
         this.harga = harga;
+        this.idKlaim = idKlaim;
     }
 
     /**
@@ -60,6 +62,20 @@ public class Dokter {
      */
     public void setHarga(String harga) {
         this.harga = harga;
+    }
+
+    /**
+     * @return the idKlaim
+     */
+    public String getIdKlaim() {
+        return idKlaim;
+    }
+
+    /**
+     * @param idKlaim the idKlaim to set
+     */
+    public void setIdKlaim(String idKlaim) {
+        this.idKlaim = idKlaim;
     }
     
     

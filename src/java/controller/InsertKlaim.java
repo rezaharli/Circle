@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.DokterDAO;
 import dao.KlaimDAO;
 import dao.ObatDAO;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Dokter;
 import model.Klaim;
 import model.Obat;
 import model.User;
@@ -100,6 +102,9 @@ public class InsertKlaim extends HttpServlet {
             
             Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
             ObatDAO.insert(obat);
+            
+            Dokter dokter = new Dokter(null, namaDokter, hargaDokter, klaim.getId());
+            DokterDAO.insert(dokter);
         } catch (NullPointerException m) {
             m.printStackTrace(response.getWriter());
         }
