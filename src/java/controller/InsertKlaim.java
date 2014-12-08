@@ -83,23 +83,22 @@ public class InsertKlaim extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String namaDokter = request.getParameter("namaDokter");
-            String hargaDokter = request.getParameter("hargaDokter");
-            String namaObat = request.getParameter("namaObat");
-            String hargaObat = request.getParameter("hargaObat");
+            int jumlahDokter = Integer.parseInt(request.getParameter("jumlahDokter"));
+            int jumlahObat = Integer.parseInt(request.getParameter("jumlahObat"));
 
-//            HttpSession session = request.getSession(false);
-//            User user = (User) session.getAttribute("currentSessionUser");
+            HttpSession session = request.getSession(false);
+            User user = (User) session.getAttribute("currentSessionUser");
 //
-//            Klaim klaim = new Klaim(null, Tanggal.getTanggalSekarang(), user.getUsername());
-//            klaim.setId(KlaimDAO.insert(klaim));
-//            
-//            Obat obat = new Obat(null, namaObat, hargaObat, klaim.getId());
-//            ObatDAO.insert(obat);
-//            
-//            Dokter dokter = new Dokter(null, namaDokter, hargaDokter, klaim.getId());
-//            DokterDAO.insert(dokter);
+            Klaim klaim = new Klaim(null, Tanggal.getTanggalSekarang(), user.getUsername());
+            klaim.setId(KlaimDAO.insert(klaim));
+//          
+            for (int i = 0; i < jumlahDokter; i++) {
+                DokterDAO.insert(new Dokter(null, request.getParameter("namaDokter" + i), request.getParameter("hargaDokter" + i), klaim.getId()));
+            }
             
+            for (int i = 0; i < jumlahObat; i++) {
+                ObatDAO.insert(new Obat(null, request.getParameter("namaObat" + i), request.getParameter("hargaObat" + i), klaim.getId()));
+            }
             response.sendRedirect("index.jsp");
         } catch (NullPointerException m) {
             m.printStackTrace(response.getWriter());
