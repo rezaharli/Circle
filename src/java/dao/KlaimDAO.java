@@ -51,7 +51,7 @@ public class KlaimDAO extends DAO {
             statement = connection.createStatement();
             rs = statement.executeQuery(sql);
             while (rs.next()) {
-                klaims.add(new Klaim(rs.getString("id"), rs.getString("tanggal"), rs.getString("username"), rs.getString("status")));
+                klaims.add(new Klaim(rs.getString("id"), rs.getString("tanggal"), rs.getString("username"), (rs.getString("status").equals("")) ? "waiting" : rs.getString("status")));
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

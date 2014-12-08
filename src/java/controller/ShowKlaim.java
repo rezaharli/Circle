@@ -71,9 +71,9 @@ public class ShowKlaim extends HttpServlet {
         PrintWriter out = response.getWriter();
         for (Klaim klaim : klaims) {
             out.write("<form style=\"height: 35px\">");
-            out.write("<input type=\"text\" disabled value=\""+klaim.getTanggal()+"\" style=\"width: 39%\"/>&nbsp;");
-            out.write("<input type=\"text\" disabled value=\""+klaim.getStatus()+"\" style=\"width: 39%\"/>&nbsp;");
-            out.write("<input type=\"button\" id=\"showDetail\" value=\">>\" class=\"button\" style=\"width: 24px\" />");
+            out.write("<input type=\"text\" disabled value=\"" + klaim.getTanggal() + "\" style=\"width: 39%\"/>&nbsp;");
+            out.write("<input type=\"text\" disabled value=\"" + klaim.getStatus() + "\" style=\"width: 39%\"/>&nbsp;");
+            out.write("<input type=\"button\" value=\">>\" class=\"button\" style=\"width: 24px\" onclick=\"showDetailKlaim(" + klaim.getId() + ", \'" + klaim.getStatus()+ "\')\" />");
             out.write("</form>");
         }
     }
