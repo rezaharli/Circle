@@ -6,6 +6,7 @@
 package dao;
 
 import static dao.DAO.connection;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -27,6 +28,7 @@ public class KlaimDAO extends DAO {
                 = "INSERT INTO `klaim` "
                 + "(`tanggal`, `username`) VALUES "
                 + "('" + klaim.getTanggal() + "', '" + klaim.getUsername() + "');";
+        System.out.println(sql);
         connection = ConnectionManager.getConnection();
         String idKlaim = null;
         try {
@@ -59,6 +61,26 @@ public class KlaimDAO extends DAO {
             reset();
         }
         return klaims;
+    }
+
+    /**
+     *
+     * @param idKlaim
+     * @param out
+     * @return
+     */
+    public static boolean delete(String idKlaim, PrintWriter out) {
+        String sql = "DELETE FROM klaim where id = " + idKlaim + ";";
+        connection = ConnectionManager.getConnection();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException ex) {
+            ex.printStackTrace(out);
+        } finally {
+            reset();
+        }
+        return true;
     }
 
 }

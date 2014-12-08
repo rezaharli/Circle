@@ -88,10 +88,10 @@ public class ShowDetailKlaim extends HttpServlet {
         out.write("Total Klaim: Rp " + (totalHargaDokter + totalHargaObat) + ",-<br />");
         out.write(statusKlaim);
         if (statusKlaim.equalsIgnoreCase("waiting")) {
-            out.write("<a href=\"http://localhost:8080/Circle/DeleteKlaim?idKlaim=" + idKlaim + "\" > - Cancel Klaim</a>");
+            out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Cancel Klaim</a>");
         }
         if (statusKlaim.equalsIgnoreCase("ditolak")) {
-            out.write("<a href=\"http://localhost:8080/Circle/DeleteKlaim?idKlaim=" + idKlaim + "\" > - Delete Klaim</a>");
+            out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Delete Klaim</a>");
         }
     }
 

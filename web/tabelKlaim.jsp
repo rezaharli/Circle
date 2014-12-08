@@ -1,4 +1,12 @@
 <script>
+    function deleteKlaim(idKlaim) {
+        var request = getRequestObject();
+        request.open("GET", "http://localhost:8080/Circle/DeleteKlaim?idKlaim=" + idKlaim);
+        request.send(null);
+        document.getElementById("detailKlaim").innerHTML = "";
+        showKlaim();
+    }
+    
     function showKlaim() {
         var request = getRequestObject();
         request.open("GET", "http://localhost:8080/Circle/ShowKlaim");
