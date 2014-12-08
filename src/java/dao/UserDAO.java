@@ -23,6 +23,7 @@ public class UserDAO extends DAO{
             if (rs.next()) {
                 user.setFullname(rs.getString("fullname"));
                 user.setEmail(rs.getString("email"));
+                user.setStatus(rs.getString("status"));
             } else {
                 user = null;
             }

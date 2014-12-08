@@ -53,8 +53,9 @@
                                         <% if (session.getAttribute("currentSessionUser") == null) {
                                                 currentUser = null;
                                             } else {%>
-                                        <%= currentUser.getUsername() + " | " + currentUser.getFullname()%>
-                                        <%= currentUser.getEmail()%>
+                                        <%= currentUser.getUsername() + " | " + currentUser.getFullname() + "<br />" %>
+                                        <%= currentUser.getEmail() + "<br />" %>
+                                        <%= currentUser.getStatus()%>
                                         <% }%>
                                     </span>
                                 </a>

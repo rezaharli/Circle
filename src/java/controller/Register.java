@@ -78,7 +78,8 @@ public class Register extends HttpServlet {
                 request.getParameter("fullname"),
                 request.getParameter("username"),
                 request.getParameter("password"),
-                request.getParameter("email")
+                request.getParameter("email"),
+                "member"
         );
 
         if (UserDAO.register(user)) {

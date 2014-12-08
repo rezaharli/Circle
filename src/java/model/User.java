@@ -15,6 +15,7 @@ public class User {
     private String username;
     private String password;
     private String email;
+    private String status;
     private Boolean loggedIn = false;
 
     public User(String username, String password) {
@@ -22,11 +23,12 @@ public class User {
         this.password = password;
     }
 
-    public User(String fullname, String username, String password, String email) {
+    public User(String fullname, String username, String password, String email, String status) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.status = status;
     }
     
     public String getUsername() {
@@ -79,6 +81,20 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }
