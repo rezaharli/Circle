@@ -5,30 +5,25 @@
  */
 package controller;
 
-import dao.DokterDAO;
 import dao.KlaimDAO;
-import dao.ObatDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Dokter;
 import model.Klaim;
-import model.Obat;
-import model.Tanggal;
 import model.User;
 
 /**
  *
  * @author Reza Harli
  */
-@WebServlet(name = "InsertKlaim", urlPatterns = {"/InsertKlaim"})
-public class InsertKlaim extends HttpServlet {
+@WebServlet(name = "ShowKlaim", urlPatterns = {"/ShowKlaim"})
+public class ShowKlaim extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +42,10 @@ public class InsertKlaim extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet InsertKlaim</title>");
+            out.println("<title>Servlet ShowKlaim</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet InsertKlaim at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ShowKlaim at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,7 +63,19 @@ public class InsertKlaim extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("currentSessionUser");
+
+        LinkedList<Klaim> klaims = KlaimDAO.selectAllByUsername(user.getUsername());
+
+        PrintWriter out = response.getWriter();
+        for (Klaim klaim : klaims) {
+            out.write("<form style=\"height: 35px\">");
+            out.write("<input type=\"text\" disabled value=\""+klaim.getTanggal()+"\" style=\"width: 39%\"/>&nbsp;");
+            out.write("<input type=\"text\" disabled value=\""+klaim.getStatus()+"\" style=\"width: 39%\"/>&nbsp;");
+            out.write("<input type=\"button\" id=\"showDetail\" value=\">>\" class=\"button\" style=\"width: 24px\" />");
+            out.write("</form>");
+        }
     }
 
     /**
@@ -82,27 +89,7 @@ public class InsertKlaim extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            int jumlahDokter = Integer.parseInt(request.getParameter("jumlahDokter"));
-            int jumlahObat = Integer.parseInt(request.getParameter("jumlahObat"));
-
-            HttpSession session = request.getSession(false);
-            User user = (User) session.getAttribute("currentSessionUser");
-
-            Klaim klaim = new Klaim(null, Tanggal.getTanggalSekarang(), user.getUsername(), null);
-            klaim.setId(KlaimDAO.insert(klaim));
-
-            for (int i = 0; i < jumlahDokter; i++) {
-                DokterDAO.insert(new Dokter(null, request.getParameter("namaDokter" + i), request.getParameter("hargaDokter" + i), klaim.getId()));
-            }
-
-            for (int i = 0; i < jumlahObat; i++) {
-                ObatDAO.insert(new Obat(null, request.getParameter("namaObat" + i), request.getParameter("hargaObat" + i), klaim.getId()));
-            }
-            response.sendRedirect("index.jsp");
-        } catch (NullPointerException m) {
-            m.printStackTrace(response.getWriter());
-        }
+        processRequest(request, response);
     }
 
     /**

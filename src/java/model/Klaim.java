@@ -14,11 +14,13 @@ public class Klaim {
     private String id;
     private String tanggal;
     private String username;
+    private String status;
 
-    public Klaim(String id, String tanggal, String username) {
+    public Klaim(String id, String tanggal, String username, String status) {
         this.id = id;
         this.tanggal = tanggal;
         this.username = username;
+        this.status = status;
     }
 
     /**
@@ -61,6 +63,20 @@ public class Klaim {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }

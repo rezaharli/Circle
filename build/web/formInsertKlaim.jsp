@@ -2,18 +2,21 @@
     $(document).ready(function () {
         var iDokter = 0;
         var iObat = 0;
+
         $("#jumlahDokter").attr("value", iDokter);
         $("#jumlahObat").attr("value", iObat);
+
         $("#addDokter").click(function () {
-            $("#fieldDokter").append('<div><input type="text" name="namaDokter' + iDokter + '" placeholder="Dokter" style="width: 55%; float:left" />&nbsp;<input type="text" name="hargaDokter' + iDokter + '" placeholder="Harga Dokter" style="width: 29%;" />&nbsp;<input type="button" value="-" class="button remove" style="width: 13%" /></div>');
+            $("#fieldDokter").append('<div><input type="text" id="namaDokter' + iDokter + '" name="namaDokter' + iDokter + '" placeholder="Dokter" style="width: 55%; float:left" />&nbsp;<input type="text" id="hargaDokter' + iDokter + '" name="hargaDokter' + iDokter + '" placeholder="Harga Dokter" style="width: 29%;" />&nbsp;<input type="button" value="-" class="button remove" style="width: 13%" /></div>');
             iDokter++;
             $("#jumlahDokter").attr("value", iDokter);
         });
         $("#addObat").click(function () {
-            $("#fieldObat").append('<div><input type="text" name="namaObat' + iObat + '" placeholder="Obat" style="width: 55%; float:left" />&nbsp;<input type="text" name="hargaObat' + iObat + '" placeholder="Harga Obat" style="width: 29%;" />&nbsp;<input type="button" value="-" class="button remove" style="width: 13%" /></div>');
+            $("#fieldObat").append('<div><input type="text" id="namaObat' + iObat + '" name="namaObat' + iObat + '" placeholder="Obat" style="width: 55%; float:left" />&nbsp;<input type="text" id="hargaObat' + iObat + '" name="hargaObat' + iObat + '" placeholder="Harga Obat" style="width: 29%;" />&nbsp;<input type="button" value="-" class="button remove" style="width: 13%" /></div>');
             iObat++;
             $("#jumlahObat").attr("value", iObat);
         });
+
         $("#fieldDokter").on('click', '.remove', function () {
             $(this).parent().remove();
             iDokter--;
@@ -24,11 +27,12 @@
             iObat--;
             $("#jumlahObat").attr("value", iObat);
         });
+
     });
 </script>
 
 <div class="col-md-6">
-    <form action="InsertKlaim" method="post" style="margin-top: 30px;">
+    <form action="InsertKlaim" method="post" style="margin-top: 30px;" id="formKlaim">
 
         <input type="hidden" name="jumlahDokter" id="jumlahDokter" />
         <input type="hidden" name="jumlahObat" id="jumlahObat" />
@@ -45,12 +49,4 @@
     </form>
 </div>
 
-<div class="toggle-content text-center">
-    <table>
-        <tr>
-            <td>
-                Poiuy
-            </td>
-        </tr>
-    </table>
-</div>
+<div class="toggle-content text-center" id="iniInvoice"></div>
