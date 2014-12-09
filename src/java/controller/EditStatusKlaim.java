@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import dao.KlaimDAO;
@@ -12,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Reza Harli
  */
-@WebServlet(name = "DeleteKlaim", urlPatterns = {"/DeleteKlaim"})
-public class DeleteKlaim extends HttpServlet {
+@WebServlet(name = "EditStatusKlaim", urlPatterns = {"/EditStatusKlaim"})
+public class EditStatusKlaim extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -28,7 +33,8 @@ public class DeleteKlaim extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String idKlaim = request.getParameter("idKlaim");
-        KlaimDAO.delete(idKlaim);
-    }
+        String status = request.getParameter("status");
+        KlaimDAO.editStatus(idKlaim, status);
+    }// </editor-fold>
 
 }

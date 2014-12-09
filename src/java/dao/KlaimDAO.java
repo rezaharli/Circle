@@ -6,7 +6,6 @@
 package dao;
 
 import static dao.DAO.connection;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
@@ -63,20 +62,49 @@ public class KlaimDAO extends DAO {
         return klaims;
     }
 
+    public static LinkedList<Klaim> selectAll() {
+        String sql = "select * from klaim";
+        connection = ConnectionManager.getConnection();
+        LinkedList<Klaim> klaims = new LinkedList<>();
+        try {
+            statement = connection.createStatement();
+            rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                klaims.add(new Klaim(rs.getString("id"), rs.getString("tanggal"), rs.getString("username"), (rs.getString("status").equals("")) ? "waiting" : rs.getString("status")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            reset();
+        }
+        return klaims;
+    }
+
     /**
      *
      * @param idKlaim
-     * @param out
      * @return
      */
-    public static boolean delete(String idKlaim, PrintWriter out) {
+    public static boolean delete(String idKlaim) {
         String sql = "DELETE FROM klaim where id = " + idKlaim + ";";
         connection = ConnectionManager.getConnection();
         try {
             statement = connection.createStatement();
             statement.executeUpdate(sql);
         } catch (SQLException ex) {
-            ex.printStackTrace(out);
+        } finally {
+            reset();
+        }
+        return true;
+    }
+
+    public static boolean editStatus(String idKlaim, String status) {
+        String sql = "UPDATE `circle`.`klaim` SET `status` = '" + status + "' WHERE `klaim`.`id` = " + idKlaim + ";";
+        connection = ConnectionManager.getConnection();
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate(sql);
+        } catch (SQLException ex) {
         } finally {
             reset();
         }

@@ -6,7 +6,23 @@
         document.getElementById("detailKlaim").innerHTML = "";
         showKlaim();
     }
-    
+
+    function approveKlaim(idKlaim) {
+        var request = getRequestObject();
+        request.open("GET", "http://localhost:8080/Circle/EditStatusKlaim?idKlaim=" + idKlaim + "&status=approved");
+        request.send(null);
+        showKlaim();
+        showDetailKlaim();
+    }
+
+    function tolakKlaim(idKlaim) {
+        var request = getRequestObject();
+        request.open("GET", "http://localhost:8080/Circle/EditStatusKlaim?idKlaim=" + idKlaim + "&status=ditolak");
+        request.send(null);
+        showKlaim();
+        showDetailKlaim();
+    }
+
     function showKlaim() {
         var request = getRequestObject();
         request.open("GET", "http://localhost:8080/Circle/ShowKlaim");
@@ -17,7 +33,7 @@
             }
         };
     }
-    
+
     function showDetailKlaim(idKlaim, status) {
         var request = getRequestObject();
         request.open("GET", "http://localhost:8080/Circle/ShowDetailKlaim?idKlaim=" + idKlaim + "&statusKlaim=" + status);
@@ -32,9 +48,9 @@
 
 <div class="col-md-6" style="margin-top: 30px">
     <form style="height: 35px">
-            <input type="text" disabled value="Tanggal Klaim" style="width: 39%"/>
-            <input type="text" disabled value="Status Klaim" style="width: 39%"/>
-        </form>
+        <input type="text" disabled value="Tanggal Klaim" style="width: 39%"/>
+        <input type="text" disabled value="Status Klaim" style="width: 39%"/>
+    </form>
     <div id="listKlaim"></div>
 </div>
 

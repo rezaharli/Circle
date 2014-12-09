@@ -15,8 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Dokter;
 import model.Obat;
+import model.User;
 
 /**
  *
@@ -87,11 +89,21 @@ public class ShowDetailKlaim extends HttpServlet {
 
         out.write("Total Klaim: Rp " + (totalHargaDokter + totalHargaObat) + ",-<br />");
         out.write(statusKlaim);
-        if (statusKlaim.equalsIgnoreCase("waiting")) {
-            out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Cancel Klaim</a>");
-        }
-        if (statusKlaim.equalsIgnoreCase("ditolak")) {
-            out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Delete Klaim</a>");
+
+        HttpSession session = request.getSession(false);
+        User user = (User) session.getAttribute("currentSessionUser");
+        if (user.getStatus().equalsIgnoreCase("member")) {
+            if (statusKlaim.equalsIgnoreCase("waiting")) {
+                out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Cancel Klaim</a>");
+            }
+            if (statusKlaim.equalsIgnoreCase("ditolak")) {
+                out.write("<a href=\"#\" onclick=\"deleteKlaim(" + idKlaim + ")\" > - Delete Klaim</a>");
+            }
+        } else {
+            if (statusKlaim.equalsIgnoreCase("waiting")) {
+                out.write("<a href=\"#\" onclick=\"approveKlaim(" + idKlaim + ")\" > - Approve Klaim</a>");
+                out.write("<a href=\"#\" onclick=\"tolakKlaim(" + idKlaim + ")\" > - Tolak Klaim</a>");
+            }
         }
     }
 

@@ -65,15 +65,20 @@ public class ShowKlaim extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         User user = (User) session.getAttribute("currentSessionUser");
-
-        LinkedList<Klaim> klaims = KlaimDAO.selectAllByUsername(user.getUsername());
+        
+        LinkedList<Klaim> klaims;
+        if (user.getStatus().equals("member")) {
+            klaims = KlaimDAO.selectAllByUsername(user.getUsername());
+        } else {
+            klaims = KlaimDAO.selectAll();
+        }
 
         PrintWriter out = response.getWriter();
         for (Klaim klaim : klaims) {
             out.write("<form style=\"height: 35px\">");
             out.write("<input type=\"text\" disabled value=\"" + klaim.getTanggal() + "\" style=\"width: 39%\"/>&nbsp;");
             out.write("<input type=\"text\" disabled value=\"" + klaim.getStatus() + "\" style=\"width: 39%\"/>&nbsp;");
-            out.write("<input type=\"button\" value=\">>\" class=\"button\" style=\"width: 24px\" onclick=\"showDetailKlaim(" + klaim.getId() + ", \'" + klaim.getStatus()+ "\')\" />");
+            out.write("<input type=\"button\" value=\">>\" class=\"button\" style=\"width: 24px\" onclick=\"showDetailKlaim(" + klaim.getId() + ", \'" + klaim.getStatus() + "\')\" />");
             out.write("</form>");
         }
     }
